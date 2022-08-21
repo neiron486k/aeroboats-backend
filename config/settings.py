@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+
 import environ
 
 env = environ.Env(
@@ -59,7 +60,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "aeroboat.urls"
+ROOT_URLCONF = "config.urls"
 
 TEMPLATES = [
     {
@@ -77,7 +78,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "aeroboat.wsgi.application"
+WSGI_APPLICATION = "config.wsgi.application"
 
 # Parse database connection url strings
 # like psql://user:pass@127.0.0.1:8458/db
@@ -119,6 +120,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
+STATIC_ROOT = Path.joinpath(BASE_DIR, "static")
 STATIC_URL = "static/"
 
 # Default primary key field type
