@@ -1,5 +1,10 @@
-from django.http import HttpResponse
+from rest_framework import viewsets, permissions
+
+from .models import User
+from .serialisers import UserSerializer
 
 
-def index(request):
-    return HttpResponse("You're at the user index.")
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all().order_by("-date_joined")
+    serializer_class = UserSerializer
+    permission_classes = [permissions.IsAuthenticated]
