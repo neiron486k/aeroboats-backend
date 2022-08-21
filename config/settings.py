@@ -48,7 +48,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "sorl.thumbnail",
     "user",
+    "carousel",
 ]
 
 MIDDLEWARE = [
@@ -123,6 +125,9 @@ USE_TZ = True
 
 STATIC_ROOT = Path.joinpath(BASE_DIR, "static")
 STATIC_URL = "static/"
+
+MEDIA_ROOT = Path.joinpath(BASE_DIR, "upload")
+MEDIA_URL = "upload/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
