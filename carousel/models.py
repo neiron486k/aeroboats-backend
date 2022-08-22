@@ -8,6 +8,9 @@ class Carousel(models.Model):
     description = models.TextField()
     thumbnail = models.ImageField(upload_to="carousel", default="")
 
+    class Meta:
+        ordering = ["-id"]
+
     @property
     def thumbnail_preview(self) -> str:
         return self.__get_image()
