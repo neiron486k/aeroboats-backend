@@ -10,7 +10,7 @@ class TestCarousel(APITestCase):
             title="test title", description="test description", thumbnail="image_url"
         )
 
-        response = self.client.get("/api/v1/carousel/items")
+        response = self.client.get("/api/v1/carousel/slides")
         carousel_item = response.data["results"][0]
         carousel_item_keys = carousel_item.keys()
 
