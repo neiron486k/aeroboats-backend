@@ -1,10 +1,5 @@
-from rest_framework import routers
+from django.urls import path
+
 from .views import CarouselViewSet
-from django.urls import path, include
 
-router = routers.DefaultRouter()
-router.register(r"carousels", CarouselViewSet)
-
-urlpatterns = [
-    path("", include(router.urls)),
-]
+urlpatterns = [path("carousel/items", CarouselViewSet.as_view())]
