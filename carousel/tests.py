@@ -1,12 +1,12 @@
 from rest_framework import status
 from rest_framework.test import APITestCase
 
-from carousel.models import Carousel
+from carousel.models import Slide
 
 
 class TestCarousel(APITestCase):
     def test_get_items(self):
-        Carousel.objects.create(
+        Slide.objects.create(
             title="test title", description="test description", thumbnail="image_url"
         )
 

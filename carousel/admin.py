@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Carousel
+from .models import Slide
 
 
 class CarouselAdmin(admin.ModelAdmin):
@@ -19,4 +19,4 @@ class CarouselAdmin(admin.ModelAdmin):
     thumbnail_preview.allow_tags = True
 
 
-admin.site.register(Carousel, CarouselAdmin)
+admin.site.register(Slide, CarouselAdmin)

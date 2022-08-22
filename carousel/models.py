@@ -3,7 +3,7 @@ from sorl.thumbnail import get_thumbnail
 from django.utils.html import format_html
 
 
-class Carousel(models.Model):
+class Slide(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
     thumbnail = models.ImageField(upload_to="carousel", default="")
