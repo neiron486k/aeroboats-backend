@@ -11,7 +11,7 @@ class TestCarousel(APITestCase):
         )
 
         response = self.client.get("/api/v1/carousel/slides/")
-        carousel_item = response.data["results"][0]
+        carousel_item = response.data[0]
         carousel_item_keys = carousel_item.keys()
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
