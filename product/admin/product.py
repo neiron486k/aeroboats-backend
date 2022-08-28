@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Product, Media, Category
+from product.models.product import Product, Media
 
 
 class MediaInline(admin.TabularInline):
@@ -10,8 +10,3 @@ class MediaInline(admin.TabularInline):
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     inlines = [MediaInline]
-
-
-@admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
-    fields = ["name"]

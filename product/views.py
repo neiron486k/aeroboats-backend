@@ -1,6 +1,6 @@
 from rest_framework import generics, permissions
 
-from .models import Product
+from product.models.product import Product
 from .serializers import ProductSerializer
 
 
