@@ -1,14 +1,16 @@
 from django.db import models
 
-from product.mixins import NameModelMixin, DetailsModelMixin
-from product.models import Part
+from products.mixins import NameModelMixin
 
 
-class Product(NameModelMixin, DetailsModelMixin, models.Model):
-    parts = models.ManyToManyField(Part)
+class Product(NameModelMixin, models.Model):
+    description = models.TextField()
+    price = models.FloatField()
+    is_active = models.BooleanField(default=True)
 
     class Meta:
         db_table = "product"
+        ordering = ["-id"]
 
 
 class Media(models.Model):

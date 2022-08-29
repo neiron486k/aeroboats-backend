@@ -11,13 +11,3 @@ class NameModelMixin(models.Model):
 
     def __str__(self) -> models.CharField:
         return self.name
-
-
-class DetailsModelMixin(models.Model):
-    """Details for product model"""
-
-    price = models.FloatField(default=0)
-    description = models.TextField()
-
-    class Meta:
-        abstract = True
