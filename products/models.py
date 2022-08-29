@@ -16,5 +16,5 @@ class Product(NameModelMixin, models.Model):
 class Media(models.Model):
     """Media table for store product photos and video"""
 
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="media")
     path = models.FileField(upload_to="product")
