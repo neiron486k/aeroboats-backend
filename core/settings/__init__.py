@@ -1,3 +1,3 @@
 from .django import *
-from .djoser import *
 from .drf import *
+from .jwt import *

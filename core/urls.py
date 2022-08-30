@@ -11,9 +11,9 @@ router = routers.DefaultRouter()
 router.register(r"users", UserViewSet)
 
 urlpatterns = [
+    path("api/v1/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
+    path("api/v1/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
     path("admin/", admin.site.urls),
-    path("api/v1/auth/", include("djoser.urls")),
-    path("api/v1/auth/", include("djoser.urls.jwt")),
     path("api/v1/", include("carousel.urls")),
     path("api/v1/", include(router.urls)),
     path("api/v1/", include("products.urls")),
