@@ -4,6 +4,7 @@ from django.utils.translation import gettext_lazy as _
 
 from products.managers import ProductManager
 from products.mixins import NameModelMixin
+from products.services import upload_media_path
 from products.validators import file_size
 
 
@@ -13,13 +14,13 @@ class Product(NameModelMixin, models.Model):
     is_active = models.BooleanField(_("active"), default=True)
     position = models.PositiveIntegerField(_("position"), default=0)
 
+    objects = ProductManager()
+
     class Meta:
         db_table = "product"
         verbose_name = _("product")
         verbose_name_plural = _("products")
         ordering = ["position"]
-
-    objects = ProductManager()
 
 
 class Media(models.Model):
@@ -28,7 +29,7 @@ class Media(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="media")
     path = models.FileField(
         _("path"),
-        upload_to="product",
+        upload_to=upload_media_path,
         validators=[
             FileExtensionValidator(allowed_extensions=["png", "webp", "mp4", "mpv"]),
             file_size,
