@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework_simplejwt",
     "sorl.thumbnail",
-    "core",
+    "users",
     "carousel",
     "products",
     "orders",
@@ -59,7 +59,7 @@ if DEBUG:
     MIDDLEWARE += ["corsheaders.middleware.CorsMiddleware"]
     CORS_ALLOW_ALL_ORIGINS = True
 
-ROOT_URLCONF = "core.urls"
+ROOT_URLCONF = "config.urls"
 
 TEMPLATES = [
     {
@@ -77,7 +77,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "core.wsgi.application"
+WSGI_APPLICATION = "config.wsgi.application"
 
 # Parse database connection url strings
 # like psql://user:pass@127.0.0.1:8458/db
@@ -85,7 +85,7 @@ DATABASES = {
     "default": env.db(),
 }
 
-AUTH_USER_MODEL = "core.User"
+AUTH_USER_MODEL = "users.CustomUser"
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
