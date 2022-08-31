@@ -20,4 +20,3 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     class Meta:
         db_table = "auth_user"
-        # ordering = ["-id"]

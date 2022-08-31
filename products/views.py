@@ -5,6 +5,6 @@ from products.serializers import ProductSerializer
 
 
 class ProductListViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Product.objects.all()
+    queryset = Product.objects.get_active_products()
     serializer_class = ProductSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]

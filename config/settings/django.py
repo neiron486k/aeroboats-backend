@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework_simplejwt",
     "sorl.thumbnail",
+    "adminsortable2",
     "users",
     "carousel",
     "products",
