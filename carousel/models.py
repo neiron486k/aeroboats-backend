@@ -21,14 +21,10 @@ class Slide(models.Model):
 
     def __get_image(self, size: str = "300x300"):
         if self.thumbnail:
-            _thumbnail = get_thumbnail(
-                self.thumbnail, size, upscale=False, crop=False, quality=100
-            )
+            _thumbnail = get_thumbnail(self.thumbnail, size, upscale=False, crop=False, quality=100)
 
             return format_html(
-                '<img src="{}" width="{}" height="{}">'.format(
-                    _thumbnail.url, _thumbnail.width, _thumbnail.height
-                )
+                '<img src="{}" width="{}" height="{}">'.format(_thumbnail.url, _thumbnail.width, _thumbnail.height)
             )
 
         return ""

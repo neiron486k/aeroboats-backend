@@ -1,17 +1,20 @@
 from django.core.validators import FileExtensionValidator
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 from products.mixins import NameModelMixin
 from products.validators import file_size
 
 
 class Product(NameModelMixin, models.Model):
-    description = models.TextField()
-    price = models.FloatField()
-    is_active = models.BooleanField(default=True)
+    description = models.TextField(_("description"))
+    price = models.FloatField(_("price"))
+    is_active = models.BooleanField(_("active"), default=True)
 
     class Meta:
         db_table = "product"
+        verbose_name = _("product")
+        verbose_name_plural = _("products")
         ordering = ["-id"]
 
 

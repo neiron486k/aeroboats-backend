@@ -6,9 +6,7 @@ from products.models import Product, Media
 
 class TestProductListViewSet(APITestCase):
     def test_list(self):
-        new_product = Product.objects.create(
-            name="test product", description="test", price=100.50
-        )
+        new_product = Product.objects.create(name="test product", description="test", price=100.50)
         Media.objects.create(path="path_to_file", product=new_product)
 
         response = self.client.get("/api/v1/products/")

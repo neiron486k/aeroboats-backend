@@ -6,9 +6,7 @@ from carousel.models import Slide
 
 class TestCarousel(APITestCase):
     def test_get_items(self):
-        Slide.objects.create(
-            title="test title", description="test description", thumbnail="image_url"
-        )
+        Slide.objects.create(title="test title", description="test description", thumbnail="image_url")
 
         response = self.client.get("/api/v1/carousel/slides/")
         carousel_item = response.data[0]
