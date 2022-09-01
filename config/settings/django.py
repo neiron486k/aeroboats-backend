@@ -57,8 +57,8 @@ MIDDLEWARE = [
 ]
 
 if DEBUG:
-    INSTALLED_APPS += ["corsheaders"]
-    MIDDLEWARE += ["corsheaders.middleware.CorsMiddleware"]
+    INSTALLED_APPS += ["corsheaders", "silk"]
+    MIDDLEWARE += ["corsheaders.middleware.CorsMiddleware", "silk.middleware.SilkyMiddleware"]
     CORS_ALLOW_ALL_ORIGINS = True
 
 ROOT_URLCONF = "config.urls"
