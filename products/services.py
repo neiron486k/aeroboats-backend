@@ -1,4 +1,7 @@
-def upload_media_path(instance, value: str):
-    """Get upload path for media"""
+from pathlib import Path
 
-    return "product/" + str(instance.pk) + "/" + value
+
+def upload_media_path(_, filename: str) -> str:
+    """Get upload path for media model"""
+
+    return Path.joinpath("product", filename)

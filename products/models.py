@@ -2,10 +2,10 @@ from django.core.validators import FileExtensionValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+from config.validators import file_size
 from products.managers import ProductManager
 from products.mixins import NameModelMixin
 from products.services import upload_media_path
-from products.validators import file_size
 
 
 class Product(NameModelMixin, models.Model):
