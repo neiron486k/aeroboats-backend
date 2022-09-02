@@ -10,7 +10,7 @@ from products.services import upload_media_path
 
 class Product(NameModelMixin, models.Model):
     description = models.TextField(_("description"))
-    price = models.FloatField(_("price"))
+    price = models.DecimalField(_("price"), decimal_places=2, max_digits=9)
     is_active = models.BooleanField(_("active"), default=True)
     position = models.PositiveIntegerField(_("position"), default=0)
 
