@@ -1,7 +1,7 @@
-from django.db import models
 from django.core.validators import FileExtensionValidator
+from django.db import models
 
-from config.validators import file_size
+from config.validators import file_size, allowed_file_extension
 from .services import upload_slide_path
 
 
@@ -12,7 +12,7 @@ class Slide(models.Model):
         upload_to=upload_slide_path,
         default="",
         validators=[
-            FileExtensionValidator(allowed_extensions=["png", "webp", "mp4", "mpv"]),
+            FileExtensionValidator(allowed_extensions=allowed_file_extension()),
             file_size,
         ],
     )

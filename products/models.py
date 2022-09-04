@@ -2,7 +2,7 @@ from django.core.validators import FileExtensionValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from config.validators import file_size
+from config.validators import file_size, allowed_file_extension
 from products.managers import ProductManager
 from products.mixins import NameModelMixin
 from products.services import upload_media_path
@@ -31,7 +31,7 @@ class Media(models.Model):
         _("path"),
         upload_to=upload_media_path,
         validators=[
-            FileExtensionValidator(allowed_extensions=["png", "webp", "mp4", "mpv"]),
+            FileExtensionValidator(allowed_extensions=allowed_file_extension()),
             file_size,
         ],
     )
