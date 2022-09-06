@@ -35,3 +35,4 @@ class Media(models.Model):
             file_size,
         ],
     )
+    is_cover = models.BooleanField(_("cover"), default=False)
