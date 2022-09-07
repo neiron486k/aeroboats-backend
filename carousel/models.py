@@ -6,6 +6,8 @@ from .services import upload_slide_path
 
 
 class Slide(models.Model):
+    """Slide of carousel"""
+
     title = models.CharField(max_length=100)
     description = models.TextField()
     cover = models.FileField(

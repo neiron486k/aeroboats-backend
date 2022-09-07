@@ -9,6 +9,8 @@ from products.services import upload_media_path
 
 
 class Product(NameModelMixin, models.Model):
+    """Products of site"""
+
     description = models.TextField(_("description"))
     price = models.DecimalField(_("price"), decimal_places=2, max_digits=9)
     is_active = models.BooleanField(_("active"), default=True)
@@ -24,7 +26,7 @@ class Product(NameModelMixin, models.Model):
 
 
 class Media(models.Model):
-    """Media model for store product photos and video"""
+    """Media for store product photos and video"""
 
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="media")
     path = models.FileField(
