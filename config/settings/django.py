@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     "sorl.thumbnail",
     "adminsortable2",
     "users",
-    "carousel",
     "products",
     "orders",
 ]
