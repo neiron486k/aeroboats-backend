@@ -1,4 +1,4 @@
-def upload_media_path(_, filename: str) -> str:
-    """Get upload path for media model"""
+def upload_image_path(_, filename: str) -> str:
+    """Get upload path images"""
 
     return "products/" + filename

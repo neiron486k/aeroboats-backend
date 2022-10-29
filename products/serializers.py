@@ -1,16 +1,16 @@
 from rest_framework import serializers
 
-from products.models import Product, Media
+from products.models import Product, Images
 
 
-class MediaSerializer(serializers.ModelSerializer):
+class ImageSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Media
+        model = Images
         exclude = ["product"]
 
 
 class ProductSerializer(serializers.ModelSerializer):
-    media = MediaSerializer(many=True)
+    images = ImageSerializer(many=True)
 
     class Meta:
         model = Product

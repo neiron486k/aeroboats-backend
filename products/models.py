@@ -1,11 +1,10 @@
-from django.core.validators import FileExtensionValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from config.validators import file_size, allowed_file_extension
+from config.validators import file_size
 from products.managers import ProductManager
 from products.mixins import NameModelMixin
-from products.services import upload_media_path
+from products.services import upload_image_path
 
 
 class Product(NameModelMixin, models.Model):
@@ -15,6 +14,12 @@ class Product(NameModelMixin, models.Model):
     price = models.DecimalField(_("price"), decimal_places=2, max_digits=9)
     is_active = models.BooleanField(_("active"), default=True)
     position = models.PositiveIntegerField(_("position"), default=0)
+    image = models.ImageField(
+        _("image"),
+        upload_to=upload_image_path,
+        validators=[file_size],
+        default='',
+    )
 
     objects = ProductManager()
 
@@ -25,16 +30,15 @@ class Product(NameModelMixin, models.Model):
         ordering = ["position"]
 
 
-class Media(models.Model):
+class Images(models.Model):
     """Media for store product photos and video"""
 
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="media")
-    path = models.FileField(
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="images")
+    path = models.ImageField(
         _("path"),
-        upload_to=upload_media_path,
-        validators=[
-            FileExtensionValidator(allowed_extensions=allowed_file_extension()),
-            file_size,
-        ],
+        upload_to=upload_image_path,
+        validators=[file_size]
     )
-    is_cover = models.BooleanField(_("cover"), default=False)
+
+    class Meta:
+        db_table = "product_images"
