@@ -18,7 +18,7 @@ class Product(NameModelMixin, models.Model):
         _("image"),
         upload_to=upload_image_path,
         validators=[file_size],
-        default='',
+        default="",
     )
 
     objects = ProductManager()
@@ -34,11 +34,7 @@ class Images(models.Model):
     """Media for store product photos and video"""
 
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="images")
-    path = models.ImageField(
-        _("path"),
-        upload_to=upload_image_path,
-        validators=[file_size]
-    )
+    path = models.ImageField(_("path"), upload_to=upload_image_path, validators=[file_size])
 
     class Meta:
         db_table = "product_images"
