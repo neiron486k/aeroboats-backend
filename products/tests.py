@@ -1,13 +1,13 @@
 from rest_framework import status
 from rest_framework.test import APITestCase
 
-from products.models import Product, Media
+from products.models import Product, Images
 
 
 class TestProductListViewSet(APITestCase):
     def test_list(self):
-        new_product = Product.objects.create(name="test product", description="test", price=100.50)
-        Media.objects.create(path="path_to_file", product=new_product)
+        product = Product.objects.create(name="test product", description="test", price=100.50)
+        image = Images.objects.create(path="", product=product)
 
         response = self.client.get("/api/v1/products/")
 
@@ -28,10 +28,10 @@ class TestProductListViewSet(APITestCase):
         self.assertIn("name", product_keys)
         self.assertIn("description", product_keys)
         self.assertIn("price", product_keys)
-        self.assertIn("media", product_keys)
+        self.assertIn("images", product_keys)
 
-        media_item = product["media"][0]
-        media_item_keys = media_item.keys()
+        image = product["images"][0]
+        image_keys = image.keys()
 
-        self.assertIn("id", media_item_keys)
-        self.assertIn("path", media_item_keys)
+        self.assertIn("id", image_keys)
+        self.assertIn("path", image_keys)
