@@ -10,6 +10,7 @@ from products.services import upload_image_path
 class Product(NameModelMixin, models.Model):
     """Products of site"""
 
+    short_description = models.TextField(_("short_description"), default='')
     description = models.TextField(_("description"))
     price = models.DecimalField(_("price"), decimal_places=2, max_digits=9)
     is_active = models.BooleanField(_("active"), default=True)

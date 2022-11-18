@@ -26,6 +26,7 @@ class TestProductListViewSet(APITestCase):
 
         self.assertIn("id", product_keys)
         self.assertIn("name", product_keys)
+        self.assertIn("short_description", product_keys)
         self.assertIn("description", product_keys)
         self.assertIn("price", product_keys)
         self.assertIn("images", product_keys)
