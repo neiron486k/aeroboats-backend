@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "django_cleanup.apps.CleanupConfig",
     "sorl.thumbnail",
     "adminsortable2",
+    'ckeditor',
     "users",
     "products",
     "orders",

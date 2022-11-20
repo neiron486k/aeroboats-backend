@@ -5,13 +5,14 @@ from config.validators import file_size
 from products.managers import ProductManager
 from products.mixins import NameModelMixin
 from products.services import upload_image_path
+from ckeditor.fields import RichTextField
 
 
 class Product(NameModelMixin, models.Model):
     """Products of site"""
 
     short_description = models.TextField(_("short_description"), default='')
-    description = models.TextField(_("description"))
+    description = RichTextField(_("description"))
     price = models.DecimalField(_("price"), decimal_places=2, max_digits=9)
     is_active = models.BooleanField(_("active"), default=True)
     position = models.PositiveIntegerField(_("position"), default=0)
