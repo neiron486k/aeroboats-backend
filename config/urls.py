@@ -9,6 +9,7 @@ urlpatterns = [
     path("api/v1/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
     path("admin/", admin.site.urls),
     path("api/v1/", include("products.urls")),
+    path("api/v1/", include("works.urls")),
 ]
 
 if settings.DEBUG:

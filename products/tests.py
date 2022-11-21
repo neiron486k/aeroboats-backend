@@ -7,7 +7,7 @@ from products.models import Product, Images
 class TestProductListViewSet(APITestCase):
     def test_list(self):
         product = Product.objects.create(name="test product", description="test", price=100.50)
-        image = Images.objects.create(path="", product=product)
+        Images.objects.create(path="", product=product)
 
         response = self.client.get("/api/v1/products/")
 
