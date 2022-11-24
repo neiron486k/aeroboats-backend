@@ -4,7 +4,11 @@ services:
   db:
     image: postgres
     container_name: db
+    volumes:
+      - app:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: admin
     ports:
       - "5432:5432"
+volumes:
+  app:
