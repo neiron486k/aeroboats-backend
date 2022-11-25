@@ -3,9 +3,11 @@ from django.utils.translation import gettext_lazy as _
 
 from config.validators import file_size
 from products.managers import ProductManager
-from products.mixins import NameModelMixin
+from config.mixins import NameModelMixin
 from products.services import upload_image_path
 from ckeditor.fields import RichTextField
+
+from specifications.models import Specification
 
 
 class Product(NameModelMixin, models.Model):
@@ -22,6 +24,7 @@ class Product(NameModelMixin, models.Model):
         validators=[file_size],
         default="",
     )
+    specifications = models.ManyToManyField(Specification, through='ProductsSpecifications')
 
     objects = ProductManager()
 
@@ -40,3 +43,13 @@ class Images(models.Model):
 
     class Meta:
         db_table = "product_images"
+
+
+class ProductsSpecifications(models.Model):
+    """Pivot table with products and specifications"""
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    specification = models.ForeignKey(Specification, on_delete=models.CASCADE)
+    value = models.CharField(_('value'), max_length=255)
+
+    class Meta:
+        db_table = "products_specifications"
