@@ -1,12 +1,11 @@
+from ckeditor.fields import RichTextField
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+from config.mixins import NameModelMixin
 from config.validators import file_size
 from products.managers import ProductManager
-from config.mixins import NameModelMixin
 from products.services import upload_image_path
-from ckeditor.fields import RichTextField
-
 from specifications.models import Specification
 
 
@@ -46,10 +45,14 @@ class Images(models.Model):
 
 
 class ProductsSpecifications(models.Model):
-    """Pivot table with products and specifications"""
+    """Pivot table for products and specifications"""
+
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     specification = models.ForeignKey(Specification, on_delete=models.CASCADE)
     value = models.CharField(_('value'), max_length=255)
 
     class Meta:
         db_table = "products_specifications"
+        unique_together = ('product', 'specification',)
+        verbose_name = _("product specifications")
+        verbose_name_plural = _("product specifications")
