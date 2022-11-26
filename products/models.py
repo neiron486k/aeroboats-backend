@@ -50,6 +50,7 @@ class ProductsSpecifications(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     specification = models.ForeignKey(Specification, on_delete=models.CASCADE)
     value = models.CharField(_("value"), max_length=255)
+    position = models.PositiveIntegerField(_("position"), default=0)
 
     class Meta:
         db_table = "products_specifications"
@@ -59,3 +60,4 @@ class ProductsSpecifications(models.Model):
         )
         verbose_name = _("product specifications")
         verbose_name_plural = _("product specifications")
+        ordering = ["position"]
