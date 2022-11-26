@@ -1,3 +1,3 @@
 CKEDITOR_CONFIGS = {
-    'default': {},
+    "default": {},
 }

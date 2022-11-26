@@ -10,30 +10,36 @@ class ImageSerializer(serializers.ModelSerializer):
 
 
 class SpecificationSerializer(serializers.ModelSerializer):
-    name = serializers.SerializerMethodField('_get_name')
-    image = serializers.SerializerMethodField('_get_image')
+    name = serializers.SerializerMethodField("_get_name")
+    image = serializers.SerializerMethodField("_get_image")
 
     @staticmethod
     def _get_name(obj: ProductsSpecifications) -> str:
         return obj.specification.name
 
-    @staticmethod
-    def _get_image(obj: ProductsSpecifications) -> str:
-        return obj.specification.image.url
+    def _get_image(self, obj: ProductsSpecifications) -> str:
+        request = self.context.get("request")
+        url = obj.specification.image.url
+
+        if request:
+            url = request.build_absolute_uri(url)
+
+        return url
 
     class Meta:
         model = ProductsSpecifications
-        fields = ['name', 'image', 'value']
+        fields = ["name", "image", "value"]
 
 
 class ProductSerializer(serializers.ModelSerializer):
     images = ImageSerializer(many=True)
-    specifications = serializers.SerializerMethodField('_get_specifications')
+    specifications = serializers.SerializerMethodField("_get_specifications")
 
-    @staticmethod
-    def _get_specifications(obj: Product) -> dict:
+    def _get_specifications(self, obj: Product) -> dict:
         product_spec = obj.productsspecifications_set.all()
-        return SpecificationSerializer(product_spec, many=True).data
+        request = self.context.get("request")
+
+        return SpecificationSerializer(product_spec, many=True, context={"request": request}).data
 
     class Meta:
         model = Product

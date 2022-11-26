@@ -40,12 +40,12 @@ INSTALLED_APPS = [
     "django_cleanup.apps.CleanupConfig",
     "sorl.thumbnail",
     "adminsortable2",
-    'ckeditor',
+    "ckeditor",
     "users",
     "products",
     "orders",
     "works",
-    "specifications"
+    "specifications",
 ]
 
 MIDDLEWARE = [

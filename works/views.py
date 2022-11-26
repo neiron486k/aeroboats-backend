@@ -9,4 +9,3 @@ class WorkListViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = WorkSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     pagination_class = None
-

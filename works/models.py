@@ -6,7 +6,8 @@ from .services import upload_image_path
 
 class Work(models.Model):
     """Table store an images of completed works"""
-    image = models.ImageField(_('image'), upload_to=upload_image_path)
+
+    image = models.ImageField(_("image"), upload_to=upload_image_path)
 
     class Meta:
         db_table = "work"

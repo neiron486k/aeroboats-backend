@@ -12,7 +12,7 @@ from specifications.models import Specification
 class Product(NameModelMixin, models.Model):
     """Products of site"""
 
-    short_description = models.TextField(_("short_description"), default='')
+    short_description = models.TextField(_("short_description"), default="")
     description = RichTextField(_("description"))
     price = models.DecimalField(_("price"), decimal_places=2, max_digits=9)
     is_active = models.BooleanField(_("active"), default=True)
@@ -23,7 +23,7 @@ class Product(NameModelMixin, models.Model):
         validators=[file_size],
         default="",
     )
-    specifications = models.ManyToManyField(Specification, through='ProductsSpecifications')
+    specifications = models.ManyToManyField(Specification, through="ProductsSpecifications")
 
     objects = ProductManager()
 
@@ -49,10 +49,13 @@ class ProductsSpecifications(models.Model):
 
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     specification = models.ForeignKey(Specification, on_delete=models.CASCADE)
-    value = models.CharField(_('value'), max_length=255)
+    value = models.CharField(_("value"), max_length=255)
 
     class Meta:
         db_table = "products_specifications"
-        unique_together = ('product', 'specification',)
+        unique_together = (
+            "product",
+            "specification",
+        )
         verbose_name = _("product specifications")
         verbose_name_plural = _("product specifications")

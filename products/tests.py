@@ -10,7 +10,7 @@ class TestProductListViewSet(APITestCase):
     def test_list(self):
         product = Product.objects.create(name="test product", description="test", price=100.50)
         Images.objects.create(path="", product=product)
-        image = SimpleUploadedFile(name='test_image.jpg', content="", content_type='image/jpeg')
+        image = SimpleUploadedFile(name="test_image.jpg", content="", content_type="image/jpeg")
         specification = Specification.objects.create(name="test_specification", image=image)
         ProductsSpecifications.objects.create(product=product, specification=specification, value=100)
 
