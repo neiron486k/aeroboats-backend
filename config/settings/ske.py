@@ -1,3 +1,5 @@
 CKEDITOR_CONFIGS = {
-    "default": {},
+    "default": {
+        'toolbar': 'full',
+    },
 }
