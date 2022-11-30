@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "sorl.thumbnail",
     "adminsortable2",
     "ckeditor",
+    "phonenumber_field",
     "users",
     "products",
     "orders",

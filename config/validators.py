@@ -1,4 +1,5 @@
 from django.core.exceptions import ValidationError
+import re
 
 
 def file_size(file):
@@ -8,5 +9,11 @@ def file_size(file):
         raise ValidationError(f"File size must be lower than {limit}")
 
 
-def allowed_file_extension() -> list[str]:
-    return ["png", "webp", "jpg", "jpeg", "mp4", "mpv"]
+def full_name(value: str):
+    if not re.match("^[a-zA-z ']+$", value):
+        raise ValidationError(f"Incorrect full name {value}")
+
+    value = re.sub(" +", " ", value).strip()
+
+    if len(value.split(" ")) < 2:
+        raise ValidationError(f"Incorrect full name {value}")
