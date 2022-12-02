@@ -6,4 +6,4 @@ class OrdersConfig(AppConfig):
     name = "orders"
 
     def ready(self):
-        from . import signals
+        from . import signals # noqa

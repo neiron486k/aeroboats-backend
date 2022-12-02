@@ -131,3 +131,9 @@ MEDIA_URL = "upload/"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+from config.settings.celery import * # noqa
+from config.settings.drf import * # noqa
+from config.settings.jwt import * # noqa
+from config.settings.mail import * # noqa
+from config.settings.ske import * # noqa

@@ -1,6 +1,7 @@
 import environ
 
 env = environ.Env(
+    DJANGO_CONFIG_MODE=(str, 'base'),
     DEBUG=(bool, False),
     ALLOWED_HOSTS=(list, []),
     EMAIL_HOST=(str, 'localhost'),
