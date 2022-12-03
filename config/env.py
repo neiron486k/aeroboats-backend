@@ -7,6 +7,7 @@ env = environ.Env(
     EMAIL_HOST=(str, "localhost"),
     EMAIL_PORT=(str, "2525"),
     DEFAULT_FROM_EMAIL=(str, "no-replay@aeroglissers.ru"),
+    DEFAULT_TO_EMAIL=(str, "boss.kletsin1@mail.ru"),
     EMAIL_HOST_USER=(str, "user"),
     EMAIL_HOST_PASSWORD=(str, "pass"),
     EMAIL_USE_TLS=(bool, False),
