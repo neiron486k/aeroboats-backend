@@ -1,8 +1,11 @@
+from datetime import datetime
+
 from django.db import models
-from phonenumber_field.modelfields import PhoneNumberField
 from django.utils.translation import gettext_lazy as _
-from products.models import Product
+from phonenumber_field.modelfields import PhoneNumberField
+
 from config.validators import full_name
+from products.models import Product
 
 
 class Order(models.Model):
@@ -11,6 +14,7 @@ class Order(models.Model):
     full_name = models.CharField(_("full_name"), max_length=255, validators=[full_name])
     phone = PhoneNumberField(_("phone"))
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(_("created_at"), auto_now=True)
 
     class Meta:
         db_table = "order"

@@ -132,8 +132,8 @@ MEDIA_URL = "upload/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-from config.settings.celery import * # noqa
-from config.settings.drf import * # noqa
-from config.settings.jwt import * # noqa
-from config.settings.mail import * # noqa
-from config.settings.ske import * # noqa
+from config.settings.celery import *  # noqa
+from config.settings.drf import *  # noqa
+from config.settings.jwt import *  # noqa
+from config.settings.mail import *  # noqa
+from config.settings.ske import *  # noqa
