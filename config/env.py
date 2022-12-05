@@ -12,4 +12,6 @@ env = environ.Env(
     EMAIL_HOST_PASSWORD=(str, "pass"),
     EMAIL_USE_TLS=(bool, False),
     EMAIL_USE_SSL=(bool, False),
+    DRF_RECAPTCHA_SECRET_KEY=(str, 'private_key'),
+    DRF_RECAPTCHA_TESTING=(bool, False),
 )

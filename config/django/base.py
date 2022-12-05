@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "adminsortable2",
     "ckeditor",
     "phonenumber_field",
+    'drf_recaptcha',
     "users",
     "products",
     "orders",
@@ -137,3 +138,4 @@ from config.settings.drf import *  # noqa
 from config.settings.jwt import *  # noqa
 from config.settings.mail import *  # noqa
 from config.settings.ske import *  # noqa
+from config.settings.recaptcha import *  # noqa
