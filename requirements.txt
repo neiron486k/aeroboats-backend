@@ -13,3 +13,4 @@ django-cors-headers>=3.13.0
 django-silk>=5.0.1
 django-ckeditor==6.5.1
 celery>=5.2.7
+drf-recaptcha>=2.2.2
