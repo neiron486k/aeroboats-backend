@@ -10,7 +10,7 @@ def file_size(file):
 
 
 def full_name(value: str):
-    if not re.match("^[a-zA-z ']+$", value):
+    if not re.match("^[a-zA-zА-Яа-я ']+$", value):
         raise ValidationError(f"Incorrect full name {value}")
 
     value = re.sub(" +", " ", value).strip()
