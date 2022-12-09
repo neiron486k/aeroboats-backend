@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-31 11:44+0300\n"
+"POT-Creation-Date: 2022-12-09 09:45+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,33 +16,101 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
-"(n%100>=11 && n%100<=14)? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
+"%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: products/apps.py:8 products/models.py:17
-msgid "products"
-msgstr "Продукты"
-
-#: products/mixins.py:8
+#: config/mixins.py:8
 msgid "name"
 msgstr "Наименование"
 
-#: products/models.py:10
+#: config/validators.py:10
+#, python-format
+msgid "File size must be lower than %(limit)d."
+msgstr "Файл должен быть меньше %(limit)d."
+
+#: config/validators.py:14
+#, python-format
+msgid "Incorrect full name %(value)s."
+msgstr "Некорректное Ф.И.О %(value)s."
+
+#: orders/models.py:12
+#, fuzzy
+#| msgid "name"
+msgid "full_name"
+msgstr "Наименование"
+
+#: orders/models.py:13
+msgid "phone"
+msgstr "Телефон"
+
+#: orders/models.py:15
+msgid "created_at"
+msgstr "Дата создания"
+
+#: orders/models.py:19
+msgid "order"
+msgstr "Заказ"
+
+#: orders/models.py:20
+msgid "orders"
+msgstr "Заказы"
+
+#: products/apps.py:8 products/models.py:33
+msgid "products"
+msgstr "Продукты"
+
+#: products/models.py:15
+#, fuzzy
+#| msgid "description"
+msgid "short_description"
+msgstr "Описание"
+
+#: products/models.py:16
 msgid "description"
 msgstr "Описание"
 
-#: products/models.py:11
+#: products/models.py:17
 msgid "price"
 msgstr "Цена"
 
-#: products/models.py:12 users/models.py:14
+#: products/models.py:18 users/models.py:14
 msgid "active"
 msgstr "Активно"
 
-#: products/models.py:16
+#: products/models.py:19 products/models.py:53
+#, fuzzy
+#| msgid "description"
+msgid "position"
+msgstr "Описание"
+
+#: products/models.py:21 works/models.py:10
+msgid "image"
+msgstr "Изображение"
+
+#: products/models.py:32
 msgid "product"
 msgstr "Продукт"
+
+#: products/models.py:41
+msgid "path"
+msgstr "Путь"
+
+#: products/models.py:52
+msgid "value"
+msgstr "Значение"
+
+#: products/models.py:61 products/models.py:62
+msgid "product specifications"
+msgstr "Характеристика продукта"
+
+#: specifications/models.py:13
+msgid "specification"
+msgstr "Характеристика"
+
+#: specifications/models.py:14
+msgid "specifications"
+msgstr "Характеристики"
 
 #: users/admin.py:19
 msgid "Permissions"
@@ -63,6 +131,14 @@ msgstr "Сотрудник"
 #: users/models.py:15
 msgid "date joined"
 msgstr "Дата создания"
+
+#: works/models.py:14
+msgid "work"
+msgstr "Работа"
+
+#: works/models.py:15
+msgid "works"
+msgstr "Работы"
 
 #~ msgid "staff status"
 #~ msgstr "Сотрудник"
