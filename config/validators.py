@@ -7,11 +7,11 @@ def file_size(file):
     limit = 2
 
     if file.size > limit * 1024 * 1024:
-        raise ValidationError(_("File size must be lower than %(limit)d.") % {'limit': limit})
+        raise ValidationError(_("File size must be lower than %(limit)d.") % {"limit": limit})
 
 
 def full_name(value: str):
-    message = _("Incorrect full name %(value)s.") % {'value': value}
+    message = _("Incorrect full name %(value)s.") % {"value": value}
 
     if not re.match("^[a-zA-zА-Яа-я ']+$", value):
         raise ValidationError(message)
