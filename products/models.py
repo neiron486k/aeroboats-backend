@@ -39,9 +39,11 @@ class Images(models.Model):
 
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="images")
     path = models.ImageField(_("path"), upload_to=upload_image_path, validators=[file_size])
+    position = models.PositiveIntegerField(_("position"), default=0)
 
     class Meta:
         db_table = "product_images"
+        ordering = ["position"]
 
 
 class ProductsSpecifications(models.Model):
