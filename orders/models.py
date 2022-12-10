@@ -14,6 +14,9 @@ class Order(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     created_at = models.DateTimeField(_("created_at"), auto_now=True)
 
+    def __str__(self) -> str:
+        return self.full_name
+
     class Meta:
         db_table = "order"
         verbose_name = _("order")

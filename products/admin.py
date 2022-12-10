@@ -14,8 +14,5 @@ class SpecificationInline(admin.TabularInline):
 
 @admin.register(Product)
 class ProductAdmin(SortableAdminMixin, admin.ModelAdmin):
-    def get_queryset(self, request):
-        return Product.objects.all()
-
     list_display = ("name", "price", "is_active")
     inlines = [ImageInline, SpecificationInline]
