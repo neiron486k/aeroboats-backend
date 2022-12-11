@@ -12,3 +12,4 @@ class WorkListViewSetTest(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertIn("id", serialized_work.keys())
         self.assertIn("image", serialized_work.keys())
+        self.assertIn("name", serialized_work.keys())
