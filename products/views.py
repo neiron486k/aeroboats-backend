@@ -12,10 +12,7 @@ class ProductListApi(views.APIView):
 
     def get(self, request: Request) -> Response:
         return get_paginated_response(
-            serializer_class=ProductListSerialiser,
-            queryset=product_list(),
-            request=request,
-            view=self
+            serializer_class=ProductListSerialiser, queryset=product_list(), request=request, view=self
         )
 
 

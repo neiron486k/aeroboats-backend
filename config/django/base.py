@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     "adminsortable2",
     "ckeditor",
     "phonenumber_field",
-    'drf_recaptcha',
+    "drf_recaptcha",
     "users",
     "products",
     "orders",

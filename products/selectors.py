@@ -1,3 +1,5 @@
+from django.http import Http404
+
 from .models import Product
 from django.db.models import QuerySet
 
@@ -7,4 +9,7 @@ def product_list() -> QuerySet[Product]:
 
 
 def product_get(product_id: int) -> Product:
-    return Product.objects.get(pk=product_id)
+    try:
+        return Product.objects.get(pk=product_id)
+    except Product.DoesNotExist:
+        raise Http404

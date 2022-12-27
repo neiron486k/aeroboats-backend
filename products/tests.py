@@ -33,10 +33,7 @@ class TestProductListViewSet(APITestCase):
 
     def test_get(self) -> None:
         product = Product.objects.create(
-            name="test product",
-            short_description="some text",
-            description="some large test",
-            price=100.50
+            name="test product", short_description="some text", description="some large test", price=100.50
         )
         Images.objects.create(path="", product=product)
         image_file = SimpleUploadedFile(name="test_image.jpg", content="", content_type="image/jpeg")
@@ -48,8 +45,8 @@ class TestProductListViewSet(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         data = response.data
-        image = data['images'][0]
-        specification = data['specifications'][0]
+        image = data["images"][0]
+        specification = data["specifications"][0]
 
         self.assertIn("id", data)
         self.assertIn("name", data)
@@ -60,3 +57,8 @@ class TestProductListViewSet(APITestCase):
         self.assertIn("name", specification)
         self.assertIn("image", specification)
         self.assertIn("value", specification)
+
+    def test_not_found(self) -> None:
+        response = self.client.get(f"/api/v1/products/2/")
+
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)

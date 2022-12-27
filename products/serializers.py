@@ -28,10 +28,13 @@ class ProductListSerialiser(serializers.Serializer):  # noqa
 
 class ProductDetailSerialiser(ProductListSerialiser):  # noqa
     description = serializers.CharField()
-    images = inline_serializer(many=True, fields={
-        'path': serializers.ImageField(),
-    })
-    specifications = serializers.SerializerMethodField('_get_specifications')
+    images = inline_serializer(
+        many=True,
+        fields={
+            "path": serializers.ImageField(),
+        },
+    )
+    specifications = serializers.SerializerMethodField("_get_specifications")
 
     @staticmethod
     def _get_specifications(obj: Product) -> dict:

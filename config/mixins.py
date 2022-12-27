@@ -5,7 +5,7 @@ from django.utils.translation import gettext_lazy as _
 class NameModelMixin(models.Model):
     """Name field of model"""
 
-    name = models.CharField(_("name"), max_length=100, default='')
+    name = models.CharField(_("name"), max_length=100, default="")
 
     class Meta:
         abstract = True
