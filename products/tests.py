@@ -7,12 +7,9 @@ from specifications.models import Specification
 
 
 class TestProductListViewSet(APITestCase):
-    def test_list(self):
+    def test_list(self) -> None:
         product = Product.objects.create(name="test product", description="test", price=100.50)
         Images.objects.create(path="", product=product)
-        image = SimpleUploadedFile(name="test_image.jpg", content="", content_type="image/jpeg")
-        specification = Specification.objects.create(name="test_specification", image=image)
-        ProductsSpecifications.objects.create(product=product, specification=specification, value=100)
 
         response = self.client.get("/api/v1/products/")
 
@@ -32,19 +29,34 @@ class TestProductListViewSet(APITestCase):
         self.assertIn("id", product_keys)
         self.assertIn("name", product_keys)
         self.assertIn("short_description", product_keys)
-        self.assertIn("description", product_keys)
         self.assertIn("price", product_keys)
-        self.assertIn("images", product_keys)
 
-        image = product["images"][0]
-        image_keys = image.keys()
+    def test_get(self) -> None:
+        product = Product.objects.create(
+            name="test product",
+            short_description="some text",
+            description="some large test",
+            price=100.50
+        )
+        Images.objects.create(path="", product=product)
+        image_file = SimpleUploadedFile(name="test_image.jpg", content="", content_type="image/jpeg")
+        specification = Specification.objects.create(name="test_specification", image=image_file)
+        ProductsSpecifications.objects.create(product=product, specification=specification, value=100)
 
-        self.assertIn("id", image_keys)
-        self.assertIn("path", image_keys)
+        response = self.client.get(f"/api/v1/products/{product.id}/")
 
-        specification = product["specifications"][0]
-        specification_keys = specification.keys()
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-        self.assertIn("name", specification_keys)
-        self.assertIn("image", specification_keys)
-        self.assertIn("value", specification_keys)
+        data = response.data
+        image = data['images'][0]
+        specification = data['specifications'][0]
+
+        self.assertIn("id", data)
+        self.assertIn("name", data)
+        self.assertIn("short_description", data)
+        self.assertIn("description", data)
+        self.assertIn("price", data)
+        self.assertIn("path", image)
+        self.assertIn("name", specification)
+        self.assertIn("image", specification)
+        self.assertIn("value", specification)

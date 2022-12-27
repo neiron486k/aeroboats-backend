@@ -1,46 +1,39 @@
 from rest_framework import serializers
 
-from products.models import Product, Images, ProductsSpecifications
+from config.serializers import inline_serializer
+from products.models import Product, ProductsSpecifications
 
 
-class ImageSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Images
-        exclude = ["product"]
-
-
-class SpecificationSerializer(serializers.ModelSerializer):
+class SpecificationSerializer(serializers.Serializer):  # noqa
     name = serializers.SerializerMethodField("_get_name")
     image = serializers.SerializerMethodField("_get_image")
+    value = serializers.CharField()
 
     @staticmethod
     def _get_name(obj: ProductsSpecifications) -> str:
         return obj.specification.name
 
-    def _get_image(self, obj: ProductsSpecifications) -> str:
-        request = self.context.get("request")
-        url = obj.specification.image.url
-
-        if request:
-            url = request.build_absolute_uri(url)
-
-        return url
-
-    class Meta:
-        model = ProductsSpecifications
-        fields = ["name", "image", "value"]
+    @staticmethod
+    def _get_image(obj: ProductsSpecifications) -> str:
+        return obj.specification.image.url
 
 
-class ProductSerializer(serializers.ModelSerializer):
-    images = ImageSerializer(many=True)
-    specifications = serializers.SerializerMethodField("_get_specifications")
+class ProductListSerialiser(serializers.Serializer):  # noqa
+    id = serializers.IntegerField()
+    name = serializers.CharField()
+    short_description = serializers.CharField()
+    image = serializers.ImageField()
+    price = serializers.DecimalField(max_digits=9, decimal_places=2)
 
-    def _get_specifications(self, obj: Product) -> dict:
-        product_spec = obj.productsspecifications_set.all()
-        request = self.context.get("request")
 
-        return SpecificationSerializer(product_spec, many=True, context={"request": request}).data
+class ProductDetailSerialiser(ProductListSerialiser):  # noqa
+    description = serializers.CharField()
+    images = inline_serializer(many=True, fields={
+        'path': serializers.ImageField(),
+    })
+    specifications = serializers.SerializerMethodField('_get_specifications')
 
-    class Meta:
-        model = Product
-        exclude = ["position", "is_active"]
+    @staticmethod
+    def _get_specifications(obj: Product) -> dict:
+        product_specifications = obj.productsspecifications_set.all()
+        return SpecificationSerializer(product_specifications, many=True).data
