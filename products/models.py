@@ -14,7 +14,7 @@ class Product(NameModelMixin, models.Model):
 
     short_description = models.TextField(_("short_description"), default="")
     description = RichTextField(_("description"))
-    price = models.DecimalField(_("price"), decimal_places=2, max_digits=9)
+    price = models.IntegerField(_("price"))
     is_active = models.BooleanField(_("active"), default=True)
     position = models.PositiveIntegerField(_("position"), default=0)
     image = models.ImageField(

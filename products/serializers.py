@@ -23,7 +23,7 @@ class ProductListSerialiser(serializers.Serializer):  # noqa
     name = serializers.CharField()
     short_description = serializers.CharField()
     image = serializers.ImageField()
-    price = serializers.DecimalField(max_digits=9, decimal_places=2)
+    price = serializers.IntegerField()
 
 
 class ProductDetailSerialiser(ProductListSerialiser):  # noqa
