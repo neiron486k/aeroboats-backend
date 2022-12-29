@@ -14,3 +14,10 @@ def send_order_to_email(order: Order, emails: list[str]) -> None:
     )
     message.attach_alternative(body, "text/html")
     message.send(fail_silently=False)
+
+
+def order_create(data: dict) -> Order:
+    order = Order(**data)
+    order.save()
+
+    return order

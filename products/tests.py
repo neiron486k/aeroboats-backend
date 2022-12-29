@@ -8,7 +8,7 @@ from specifications.models import Specification
 
 class TestProductListViewSet(APITestCase):
     def test_list(self) -> None:
-        product = Product.objects.create(name="test product", description="test", price=100.50)
+        product = Product.objects.create(name="test product", description="test", price=100)
         Images.objects.create(path="", product=product)
 
         response = self.client.get("/api/v1/products/")
@@ -33,7 +33,7 @@ class TestProductListViewSet(APITestCase):
 
     def test_get(self) -> None:
         product = Product.objects.create(
-            name="test product", short_description="some text", description="some large test", price=100.50
+            name="test product", short_description="some text", description="some large test", price=100
         )
         Images.objects.create(path="", product=product)
         image_file = SimpleUploadedFile(name="test_image.jpg", content="", content_type="image/jpeg")
