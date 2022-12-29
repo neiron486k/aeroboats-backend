@@ -1,11 +1,11 @@
-from rest_framework import viewsets, permissions
+from rest_framework import permissions, generics
 
-from .models import Work
+from .selectors import work_list
 from .serializers import WorkSerializer
 
 
-class WorkListViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Work.objects.all()
-    serializer_class = WorkSerializer
+class WorkListApi(generics.ListAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    queryset = work_list()
+    serializer_class = WorkSerializer
     pagination_class = None

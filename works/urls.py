@@ -1,8 +1,7 @@
-from rest_framework import routers
+from django.urls import path
 
-from .views import WorkListViewSet
+from .views import WorkListApi
 
-router = routers.DefaultRouter()
-router.register(r"works", WorkListViewSet)
-
-urlpatterns = router.urls
+urlpatterns = [
+    path("works/", WorkListApi.as_view(), name="work-list")
+]

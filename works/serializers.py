@@ -1,9 +1,7 @@
 from rest_framework import serializers
 
-from .models import Work
 
-
-class WorkSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Work
-        fields = ("id", "name", "image")
+class WorkSerializer(serializers.Serializer):  # noqa
+    id = serializers.IntegerField()
+    name = serializers.CharField()
+    image = serializers.ImageField()
