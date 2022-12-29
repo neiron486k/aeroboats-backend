@@ -4,4 +4,4 @@ from .models import Product
 
 
 def product_list() -> QuerySet[Product]:
-    return Product.objects.all()
+    return Product.objects.filter(is_active=True)
