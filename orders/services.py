@@ -18,6 +18,7 @@ def send_order_to_email(order: Order, emails: list[str]) -> None:
 
 def order_create(data: dict) -> Order:
     order = Order(**data)
+    order.price = order.product.price
     order.save()
 
     return order
