@@ -17,7 +17,7 @@ class TestCreateOrderView(APITestCase):
                 "full_name": "John Doa",
                 "phone": "+79213594494",
                 "recaptcha": "test",
-                "price": 100
+                "price": 100,
             }
 
             response = self.client.post(self.url, data)

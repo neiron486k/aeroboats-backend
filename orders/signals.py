@@ -1,9 +1,12 @@
+from django.dispatch import Signal
 from django.dispatch import receiver
-from django.db.models.signals import post_save
+
 from .models import Order
 from .tasks import notify
 
+order_created_signal = Signal()
 
-@receiver(post_save, sender=Order)
-def order_created(sender, instance, **kwargs):
-    notify.delay(instance.id)
+
+@receiver(order_created_signal)
+def order_created(order: Order, **kwargs):
+    notify.delay(order.id)
