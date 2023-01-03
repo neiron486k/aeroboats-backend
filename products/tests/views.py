@@ -1,16 +1,17 @@
-from django.core.files.uploadedfile import SimpleUploadedFile
+import os
+
 from rest_framework import status
 from rest_framework.test import APITestCase
 
-from products.models import Product, Images, ProductsSpecifications
-from specifications.models import Specification
+from .factories import ProductWithSpecificationFactory
+from products.models import Product
 
 
 class TestProductListViewSet(APITestCase):
-    def test_list(self) -> None:
-        product = Product.objects.create(name="test product", description="test", price=100)
-        Images.objects.create(path="", product=product)
+    def setUp(self) -> None:
+        self.product = ProductWithSpecificationFactory.create(images=1)
 
+    def test_list(self) -> None:
         response = self.client.get("/api/v1/products/")
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -23,24 +24,17 @@ class TestProductListViewSet(APITestCase):
         self.assertIn("page", paginated_keys)
         self.assertIn("results", paginated_keys)
 
-        product = response.data["results"][0]
-        product_keys = product.keys()
+        product_data = response.data["results"][0]
+        product_keys = product_data.keys()
 
         self.assertIn("id", product_keys)
         self.assertIn("name", product_keys)
         self.assertIn("short_description", product_keys)
         self.assertIn("price", product_keys)
+        self.assertIn("image", product_keys)
 
     def test_get(self) -> None:
-        product = Product.objects.create(
-            name="test product", short_description="some text", description="some large test", price=100
-        )
-        Images.objects.create(path="", product=product)
-        image_file = SimpleUploadedFile(name="test_image.jpg", content="", content_type="image/jpeg")
-        specification = Specification.objects.create(name="test_specification", image=image_file)
-        ProductsSpecifications.objects.create(product=product, specification=specification, value=100)
-
-        response = self.client.get(f"/api/v1/products/{product.id}/")
+        response = self.client.get(f"/api/v1/products/{self.product.id}/")
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
@@ -62,3 +56,12 @@ class TestProductListViewSet(APITestCase):
         response = self.client.get(f"/api/v1/products/2/")
 
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+    def tearDown(self) -> None:
+        os.remove(self.product.image.path)
+
+        for specification in self.product.specifications.all():
+            os.remove(specification.image.path)
+
+        for image in Product.objects.get(pk=self.product.id).images.all():
+            os.remove(image.path.path)
