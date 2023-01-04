@@ -12,3 +12,10 @@ class NameModelMixin(models.Model):
 
     def __str__(self) -> str:
         return self.name
+
+
+class PositionMixin(models.Model):
+    position = models.PositiveIntegerField(_("position"), default=0)
+
+    class Meta:
+        abstract = True

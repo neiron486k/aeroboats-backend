@@ -7,16 +7,16 @@ from config.validators import FileSizeValidator
 from django.core.validators import FileExtensionValidator
 from products.services import upload_media_path
 from specifications.models import Specification
+from config.mixins import PositionMixin
 
 
-class Product(NameModelMixin, models.Model):
+class Product( PositionMixin, NameModelMixin, models.Model):
     """Products of site"""
 
     short_description = models.TextField(_("short_description"), default="")
     description = RichTextField(_("description"))
     price = models.IntegerField(_("price"))
     is_active = models.BooleanField(_("active"), default=True)
-    position = models.PositiveIntegerField(_("position"), default=0)
     image = models.ImageField(
         _("image"),
         upload_to=upload_media_path,
@@ -32,10 +32,9 @@ class Product(NameModelMixin, models.Model):
         ordering = ["position"]
 
 
-class ProductImage(models.Model):
+class ProductImage(PositionMixin, models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="images")
     image = models.ImageField(_("image"), upload_to=upload_media_path, validators=[FileSizeValidator(2)])
-    position = models.PositiveIntegerField(_("position"), default=0)
 
     class Meta:
         db_table = "product_images"
@@ -54,13 +53,12 @@ class ProductVideo(models.Model):
         db_table = "product_videos"
 
 
-class ProductsSpecifications(models.Model):
+class ProductsSpecifications(PositionMixin, models.Model):
     """Pivot table for products and specifications"""
 
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     specification = models.ForeignKey(Specification, on_delete=models.CASCADE)
     value = models.CharField(_("value"), max_length=255)
-    position = models.PositiveIntegerField(_("position"), default=0)
 
     class Meta:
         db_table = "products_specifications"
