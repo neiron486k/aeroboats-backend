@@ -3,10 +3,10 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from config.mixins import NameModelMixin
-from config.validators import validate_file_size
+from config.validators import FileSizeValidator
+from django.core.validators import FileExtensionValidator
 from products.services import upload_media_path
 from specifications.models import Specification
-from config.fields import RestrictedFileField
 
 
 class Product(NameModelMixin, models.Model):
@@ -20,7 +20,7 @@ class Product(NameModelMixin, models.Model):
     image = models.ImageField(
         _("image"),
         upload_to=upload_media_path,
-        validators=[validate_file_size],
+        validators=[FileSizeValidator(2)],
         default="",
     )
     specifications = models.ManyToManyField(Specification, through="ProductsSpecifications")
@@ -34,7 +34,7 @@ class Product(NameModelMixin, models.Model):
 
 class ProductImage(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="images")
-    image = models.ImageField(_("image"), upload_to=upload_media_path, validators=[validate_file_size])
+    image = models.ImageField(_("image"), upload_to=upload_media_path, validators=[FileSizeValidator(2)])
     position = models.PositiveIntegerField(_("position"), default=0)
 
     class Meta:
@@ -44,7 +44,11 @@ class ProductImage(models.Model):
 
 class ProductVideo(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="videos")
-    video = RestrictedFileField(_("video"), upload_to=upload_media_path, max_upload_size=200, extensions=[".mp4"])
+    video = models.FileField(
+        _("video"),
+        upload_to=upload_media_path,
+        validators=[FileSizeValidator(10), FileExtensionValidator(allowed_extensions=("avi", "mp4"))],
+    )
 
     class Meta:
         db_table = "product_videos"

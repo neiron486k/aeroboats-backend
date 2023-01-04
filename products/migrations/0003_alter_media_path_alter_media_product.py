@@ -3,7 +3,6 @@
 import django.core.validators
 from django.db import migrations, models
 import django.db.models.deletion
-import config.validators
 
 
 class Migration(migrations.Migration):
@@ -20,7 +19,6 @@ class Migration(migrations.Migration):
                 upload_to="product",
                 validators=[
                     django.core.validators.FileExtensionValidator(allowed_extensions=["png", "webp", "mp4", "mpv"]),
-                    config.validators.validate_file_size,
                 ],
             ),
         ),
