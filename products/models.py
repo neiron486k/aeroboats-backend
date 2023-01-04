@@ -3,10 +3,10 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from config.mixins import NameModelMixin
-from config.validators import file_size
-from products.managers import ProductManager
-from products.services import upload_image_path
+from config.validators import validate_file_size
+from products.services import upload_media_path
 from specifications.models import Specification
+from config.fields import RestrictedFileField
 
 
 class Product(NameModelMixin, models.Model):
@@ -19,13 +19,11 @@ class Product(NameModelMixin, models.Model):
     position = models.PositiveIntegerField(_("position"), default=0)
     image = models.ImageField(
         _("image"),
-        upload_to=upload_image_path,
-        validators=[file_size],
+        upload_to=upload_media_path,
+        validators=[validate_file_size],
         default="",
     )
     specifications = models.ManyToManyField(Specification, through="ProductsSpecifications")
-
-    objects = ProductManager()
 
     class Meta:
         db_table = "product"
@@ -34,16 +32,22 @@ class Product(NameModelMixin, models.Model):
         ordering = ["position"]
 
 
-class Images(models.Model):
-    """Media for store product photos and video"""
-
+class ProductImage(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="images")
-    path = models.ImageField(_("path"), upload_to=upload_image_path, validators=[file_size])
+    image = models.ImageField(_("image"), upload_to=upload_media_path, validators=[validate_file_size])
     position = models.PositiveIntegerField(_("position"), default=0)
 
     class Meta:
         db_table = "product_images"
         ordering = ["position"]
+
+
+class ProductVideo(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="videos")
+    video = RestrictedFileField(_("video"), upload_to=upload_media_path, max_upload_size=200, extensions=[".mp4"])
+
+    class Meta:
+        db_table = "product_videos"
 
 
 class ProductsSpecifications(models.Model):

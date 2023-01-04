@@ -22,12 +22,12 @@ class Migration(migrations.Migration):
             model_name="media",
             name="path",
             field=models.FileField(
-                upload_to=products.services.upload_image_path,
+                upload_to=products.services.upload_media_path,
                 validators=[
                     django.core.validators.FileExtensionValidator(
                         allowed_extensions=["png", "webp", "jpg", "jpeg", "mp4", "mpv"]
                     ),
-                    config.validators.file_size,
+                    config.validators.validate_file_size,
                 ],
                 verbose_name="path",
             ),

@@ -11,7 +11,7 @@ MEDIA_ROOT = "/tmp/upload"
 @override_settings(MEDIA_ROOT=MEDIA_ROOT)
 class TestProductListViewSet(APITestCase):
     def setUp(self) -> None:
-        self.product = ProductWithSpecificationFactory.create(images=1)
+        self.product = ProductWithSpecificationFactory.create(images=1, videos=1)
 
     def test_list(self) -> None:
         response = self.client.get("/api/v1/products/")
@@ -42,6 +42,7 @@ class TestProductListViewSet(APITestCase):
 
         data = response.data
         image = data["images"][0]
+        video = data["videos"][0]
         specification = data["specifications"][0]
 
         self.assertIn("id", data)
@@ -49,7 +50,8 @@ class TestProductListViewSet(APITestCase):
         self.assertIn("short_description", data)
         self.assertIn("description", data)
         self.assertIn("price", data)
-        self.assertIn("path", image)
+        self.assertIn("image", image)
+        self.assertIn("video", video)
         self.assertIn("name", specification)
         self.assertIn("image", specification)
         self.assertIn("value", specification)

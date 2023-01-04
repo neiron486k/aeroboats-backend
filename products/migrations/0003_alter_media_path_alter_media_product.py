@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
                 upload_to="product",
                 validators=[
                     django.core.validators.FileExtensionValidator(allowed_extensions=["png", "webp", "mp4", "mpv"]),
-                    config.validators.file_size,
+                    config.validators.validate_file_size,
                 ],
             ),
         ),

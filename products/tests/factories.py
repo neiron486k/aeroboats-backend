@@ -1,6 +1,6 @@
 import factory
 
-from products.models import Product, Specification, ProductsSpecifications, Images
+from products.models import Product, Specification, ProductsSpecifications, ProductImage, ProductVideo
 
 
 class ProductFactory(factory.django.DjangoModelFactory):
@@ -16,14 +16,27 @@ class ProductFactory(factory.django.DjangoModelFactory):
     @factory.post_generation
     def images(self, _, extracted: int, **kwargs) -> None:
         assert isinstance(extracted, int)
-        return ImageFactory.create_batch(extracted, product=self)
+        return ProductImageFactory.create_batch(extracted, product=self)
+
+    @factory.post_generation
+    def videos(self, _, extracted: int, **kwargs) -> None:
+        assert isinstance(extracted, int)
+        return ProductVideoFactory.create_batch(extracted, product=self)
 
 
-class ImageFactory(factory.django.DjangoModelFactory):
+class ProductImageFactory(factory.django.DjangoModelFactory):
     class Meta:
-        model = Images
+        model = ProductImage
 
-    path = factory.django.ImageField()
+    image = factory.django.ImageField()
+    product = factory.SubFactory(ProductFactory)
+
+
+class ProductVideoFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = ProductVideo
+
+    video = factory.django.FileField()
     product = factory.SubFactory(ProductFactory)
 
 

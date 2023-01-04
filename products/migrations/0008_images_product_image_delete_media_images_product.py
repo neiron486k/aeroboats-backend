@@ -20,8 +20,8 @@ class Migration(migrations.Migration):
                 (
                     "path",
                     models.ImageField(
-                        upload_to=products.services.upload_image_path,
-                        validators=[config.validators.file_size],
+                        upload_to=products.services.upload_media_path,
+                        validators=[config.validators.validate_file_size],
                         verbose_name="path",
                     ),
                 ),
@@ -32,8 +32,8 @@ class Migration(migrations.Migration):
             name="image",
             field=models.ImageField(
                 default="",
-                upload_to=products.services.upload_image_path,
-                validators=[config.validators.file_size],
+                upload_to=products.services.upload_media_path,
+                validators=[config.validators.validate_file_size],
                 verbose_name="image",
             ),
         ),

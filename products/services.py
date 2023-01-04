@@ -1,4 +1,4 @@
-def upload_image_path(_, filename: str) -> str:
-    """Get upload path images"""
+def upload_media_path(instance, filename: str) -> str:
+    """Get upload path"""
 
     return "products/" + filename

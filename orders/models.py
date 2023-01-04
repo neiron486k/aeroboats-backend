@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from phonenumber_field.modelfields import PhoneNumberField
 
-from config.validators import full_name
+from config.validators import validate_full_name
 from products.models import Product
 from .enums import Status
 
@@ -10,7 +10,7 @@ from .enums import Status
 class Order(models.Model):
     """Orders of products"""
 
-    full_name = models.CharField(_("full_name"), max_length=255, validators=[full_name])
+    full_name = models.CharField(_("full_name"), max_length=255, validators=[validate_full_name])
     phone = PhoneNumberField(_("phone"))
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     price = models.IntegerField(default=0)

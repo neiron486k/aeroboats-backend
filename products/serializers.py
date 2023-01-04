@@ -31,7 +31,13 @@ class ProductDetailSerialiser(ProductListSerialiser):  # noqa
     images = inline_serializer(
         many=True,
         fields={
-            "path": serializers.ImageField(),
+            "image": serializers.ImageField(),
+        },
+    )
+    videos = inline_serializer(
+        many=True,
+        fields={
+            "video": serializers.FileField(),
         },
     )
     specifications = serializers.SerializerMethodField("_get_specifications")

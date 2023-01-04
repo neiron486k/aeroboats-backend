@@ -23,6 +23,8 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="order",
             name="full_name",
-            field=models.CharField(max_length=255, validators=[config.validators.full_name], verbose_name="full_name"),
+            field=models.CharField(
+                max_length=255, validators=[config.validators.validate_full_name], verbose_name="full_name"
+            ),
         ),
     ]
