@@ -1,12 +1,14 @@
-import os
+import shutil
 
 from rest_framework import status
-from rest_framework.test import APITestCase
+from rest_framework.test import APITestCase, override_settings
 
 from .factories import ProductWithSpecificationFactory
-from products.models import Product
+
+MEDIA_ROOT = "/tmp/upload"
 
 
+@override_settings(MEDIA_ROOT=MEDIA_ROOT)
 class TestProductListViewSet(APITestCase):
     def setUp(self) -> None:
         self.product = ProductWithSpecificationFactory.create(images=1)
@@ -58,10 +60,4 @@ class TestProductListViewSet(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
     def tearDown(self) -> None:
-        os.remove(self.product.image.path)
-
-        for specification in self.product.specifications.all():
-            os.remove(specification.image.path)
-
-        for image in Product.objects.get(pk=self.product.id).images.all():
-            os.remove(image.path.path)
+        shutil.rmtree(MEDIA_ROOT)
