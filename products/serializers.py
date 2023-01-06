@@ -31,12 +31,14 @@ class ProductDetailSerialiser(ProductListSerialiser):  # noqa
     images = inline_serializer(
         many=True,
         fields={
+            "id": serializers.IntegerField(),
             "image": serializers.ImageField(),
         },
     )
     videos = inline_serializer(
         many=True,
         fields={
+            "id": serializers.IntegerField(),
             "video": serializers.FileField(),
         },
     )
