@@ -2,6 +2,7 @@ from rest_framework import serializers
 
 from config.serializers import inline_serializer
 from products.models import Product, ProductsSpecifications
+from .selectors import product_specifications_set
 
 
 class SpecificationSerializer(serializers.Serializer):  # noqa
@@ -46,5 +47,5 @@ class ProductDetailSerialiser(ProductListSerialiser):  # noqa
 
     @staticmethod
     def _get_specifications(obj: Product) -> dict:
-        product_specifications = obj.productsspecifications_set.all()
+        product_specifications = product_specifications_set(obj)
         return SpecificationSerializer(product_specifications, many=True).data

@@ -33,7 +33,6 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework_simplejwt",
     "django_cleanup.apps.CleanupConfig",
-    "sorl.thumbnail",
     "adminsortable2",
     "ckeditor",
     "phonenumber_field",

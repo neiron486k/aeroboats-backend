@@ -10,7 +10,7 @@ from specifications.models import Specification
 from config.mixins import PositionMixin
 
 
-class Product( PositionMixin, NameModelMixin, models.Model):
+class Product(PositionMixin, NameModelMixin, models.Model):
     """Products of site"""
 
     short_description = models.TextField(_("short_description"), default="")
