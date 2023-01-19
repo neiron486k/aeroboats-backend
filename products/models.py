@@ -46,7 +46,7 @@ class ProductVideo(models.Model):
     video = models.FileField(
         _("video"),
         upload_to=upload_media_path,
-        validators=[FileSizeValidator(10), FileExtensionValidator(allowed_extensions=("avi", "mp4"))],
+        validators=[FileSizeValidator(100), FileExtensionValidator(allowed_extensions=("avi", "mp4"))],
     )
 
     class Meta:
